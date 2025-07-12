@@ -1,0 +1,222 @@
+/* F1 Companion Custom Theme */
+
+:root {
+  /* F1 Brand Colors */
+  --f1-red: #e10600;
+  --f1-red-dark: #c40500;
+  --f1-red-light: #ff1e00;
+  
+  /* Team Colors */
+  --red-bull: #0600ef;
+  --ferrari: #dc143c;
+  --mercedes: #00d2be;
+  --mclaren: #ff8700;
+  --alpine: #0090ff;
+  --aston-martin: #006f62;
+  --williams: #005aff;
+  --alphatauri: #2b4562;
+  --alfa-romeo: #900000;
+  --haas: #ffffff;
+  
+  /* Racing Colors */
+  --checkered-flag: #000000;
+  --track-gray: #4a5568;
+  --pit-lane: #ffd700;
+  --safety-car: #ffff00;
+  --fastest-lap: #9f7aea;
+  
+  /* Semantic Colors */
+  --success: #48bb78;
+  --warning: #ed8936;
+  --error: #f56565;
+  --info: #4299e1;
+  
+  /* Neutral Colors */
+  --background: #ffffff;
+  --background-secondary: #f7fafc;
+  --surface: #ffffff;
+  --surface-secondary: #edf2f7;
+  --border: #e2e8f0;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+}
+
+[data-theme="dark"] {
+  /* Dark theme overrides */
+  --background: #1a202c;
+  --background-secondary: #2d3748;
+  --surface: #2d3748;
+  --surface-secondary: #4a5568;
+  --border: #4a5568;
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-muted: #a0aec0;
+}
+
+/* F1 Gradient Backgrounds */
+.f1-gradient-primary {
+  background: linear-gradient(135deg, var(--f1-red) 0%, var(--f1-red-dark) 100%);
+}
+
+.f1-gradient-secondary {
+  background: linear-gradient(135deg, var(--track-gray) 0%, var(--checkered-flag) 100%);
+}
+
+.f1-gradient-racing {
+  background: linear-gradient(90deg, 
+    var(--f1-red) 0%, 
+    var(--pit-lane) 25%, 
+    var(--safety-car) 50%, 
+    var(--fastest-lap) 75%, 
+    var(--f1-red) 100%
+  );
+}
+
+/* Racing Animations */
+@keyframes racing-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes checkered-flag {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 20px; }
+}
+
+@keyframes speed-lines {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.racing-pulse {
+  animation: racing-pulse 2s ease-in-out infinite;
+}
+
+.checkered-animation {
+  background-image: 
+    linear-gradient(45deg, #000 25%, transparent 25%), 
+    linear-gradient(-45deg, #000 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #000 75%), 
+    linear-gradient(-45deg, transparent 75%, #000 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  animation: checkered-flag 1s linear infinite;
+}
+
+/* F1 Typography */
+.f1-heading {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.f1-body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.f1-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-weight: 500;
+}
+
+/* Racing Elements */
+.racing-stripe {
+  position: relative;
+  overflow: hidden;
+}
+
+.racing-stripe::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--f1-red), transparent);
+  animation: speed-lines 2s ease-in-out infinite;
+}
+
+/* Team Color Utilities */
+.team-red-bull { color: var(--red-bull); }
+.team-ferrari { color: var(--ferrari); }
+.team-mercedes { color: var(--mercedes); }
+.team-mclaren { color: var(--mclaren); }
+.team-alpine { color: var(--alpine); }
+.team-aston-martin { color: var(--aston-martin); }
+.team-williams { color: var(--williams); }
+.team-alphatauri { color: var(--alphatauri); }
+.team-alfa-romeo { color: var(--alfa-romeo); }
+.team-haas { color: var(--haas); }
+
+.bg-team-red-bull { background-color: var(--red-bull); }
+.bg-team-ferrari { background-color: var(--ferrari); }
+.bg-team-mercedes { background-color: var(--mercedes); }
+.bg-team-mclaren { background-color: var(--mclaren); }
+.bg-team-alpine { background-color: var(--alpine); }
+.bg-team-aston-martin { background-color: var(--aston-martin); }
+.bg-team-williams { background-color: var(--williams); }
+.bg-team-alphatauri { background-color: var(--alphatauri); }
+.bg-team-alfa-romeo { background-color: var(--alfa-romeo); }
+.bg-team-haas { background-color: var(--haas); }
+
+/* Position Colors */
+.position-1 { color: #ffd700; } /* Gold */
+.position-2 { color: #c0c0c0; } /* Silver */
+.position-3 { color: #cd7f32; } /* Bronze */
+.position-points { color: var(--success); } /* Green for points positions */
+.position-no-points { color: var(--text-muted); } /* Muted for non-points */
+
+/* Status Indicators */
+.status-live {
+  position: relative;
+}
+
+.status-live::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -12px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: var(--f1-red);
+  border-radius: 50%;
+  animation: racing-pulse 1s ease-in-out infinite;
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 640px) {
+  .f1-heading {
+    font-size: 1.5rem;
+  }
+  
+  .racing-stripe::before {
+    height: 1px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: #000000;
+    --text-secondary: #000000;
+  }
+  
+  [data-theme="dark"] {
+    --border: #ffffff;
+    --text-secondary: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .racing-pulse,
+  .checkered-animation,
+  .racing-stripe::before {
+    animation: none;
+  }
+}
