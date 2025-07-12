@@ -1,7 +1,7 @@
 // Ergast API service for F1 data
 // Documentation: https://ergast.com/mrd/
 
-import { getMockRacesForCurrentSeason, getMockNextRace, getMockUpcomingRaces } from './mock-data';
+import { getMockRacesForCurrentSeason, getMockNextRace, getMockUpcomingRaces, getMockDriversForCurrentSeason, getMockConstructorsForCurrentSeason } from './mock-data';
 
 const ERGAST_BASE_URL = 'https://ergast.com/api/f1';
 
@@ -170,16 +170,26 @@ export class ErgastAPI {
 
   // Get all drivers for current season
   async getCurrentSeasonDrivers(): Promise<ErgastDriver[]> {
-    const currentYear = new Date().getFullYear();
-    const data = await this.fetchData<ErgastResponse<ErgastDriver>>(`/${currentYear}/drivers`);
-    return data.MRData.DriverTable?.Drivers || [];
+    try {
+      const currentYear = new Date().getFullYear();
+      const data = await this.fetchData<ErgastResponse<ErgastDriver>>(`/${currentYear}/drivers`);
+      return data.MRData.DriverTable?.Drivers || [];
+    } catch (error) {
+      console.warn('Falling back to mock driver data due to API error:', error);
+      return getMockDriversForCurrentSeason();
+    }
   }
 
   // Get all constructors for current season
   async getCurrentSeasonConstructors(): Promise<ErgastConstructor[]> {
-    const currentYear = new Date().getFullYear();
-    const data = await this.fetchData<ErgastResponse<ErgastConstructor>>(`/${currentYear}/constructors`);
-    return data.MRData.ConstructorTable?.Constructors || [];
+    try {
+      const currentYear = new Date().getFullYear();
+      const data = await this.fetchData<ErgastResponse<ErgastConstructor>>(`/${currentYear}/constructors`);
+      return data.MRData.ConstructorTable?.Constructors || [];
+    } catch (error) {
+      console.warn('Falling back to mock constructor data due to API error:', error);
+      return getMockConstructorsForCurrentSeason();
+    }
   }
 
   // Get race results

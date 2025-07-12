@@ -15,7 +15,8 @@ export default function Home() {
       icon: Users,
       title: "Driver & Team Tracker",
       description: "Follow your favorite drivers and teams with personalized stats",
-      status: "Coming Soon"
+      status: "Available",
+      href: "/dashboard"
     },
     {
       icon: Newspaper,

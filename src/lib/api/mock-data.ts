@@ -1,5 +1,5 @@
 // Mock F1 data for development and fallback when Ergast API is unavailable
-import { ErgastRace } from './ergast';
+import { ErgastRace, ErgastDriver, ErgastConstructor } from './ergast';
 
 export const mockRaces2024: ErgastRace[] = [
   {
@@ -253,4 +253,181 @@ export function getMockUpcomingRaces(limit: number = 5): ErgastRace[] {
   });
 
   return upcomingRaces.slice(0, limit);
+}
+
+// Mock F1 Drivers for 2024/2025 season
+export const mockDrivers2024: ErgastDriver[] = [
+  {
+    driverId: 'max_verstappen',
+    permanentNumber: '1',
+    code: 'VER',
+    url: 'http://en.wikipedia.org/wiki/Max_Verstappen',
+    givenName: 'Max',
+    familyName: 'Verstappen',
+    dateOfBirth: '1997-09-30',
+    nationality: 'Dutch'
+  },
+  {
+    driverId: 'lewis_hamilton',
+    permanentNumber: '44',
+    code: 'HAM',
+    url: 'http://en.wikipedia.org/wiki/Lewis_Hamilton',
+    givenName: 'Lewis',
+    familyName: 'Hamilton',
+    dateOfBirth: '1985-01-07',
+    nationality: 'British'
+  },
+  {
+    driverId: 'charles_leclerc',
+    permanentNumber: '16',
+    code: 'LEC',
+    url: 'http://en.wikipedia.org/wiki/Charles_Leclerc',
+    givenName: 'Charles',
+    familyName: 'Leclerc',
+    dateOfBirth: '1997-10-16',
+    nationality: 'Monégasque'
+  },
+  {
+    driverId: 'lando_norris',
+    permanentNumber: '4',
+    code: 'NOR',
+    url: 'http://en.wikipedia.org/wiki/Lando_Norris',
+    givenName: 'Lando',
+    familyName: 'Norris',
+    dateOfBirth: '1999-11-13',
+    nationality: 'British'
+  },
+  {
+    driverId: 'oscar_piastri',
+    permanentNumber: '81',
+    code: 'PIA',
+    url: 'http://en.wikipedia.org/wiki/Oscar_Piastri',
+    givenName: 'Oscar',
+    familyName: 'Piastri',
+    dateOfBirth: '2001-04-06',
+    nationality: 'Australian'
+  },
+  {
+    driverId: 'carlos_sainz',
+    permanentNumber: '55',
+    code: 'SAI',
+    url: 'http://en.wikipedia.org/wiki/Carlos_Sainz_Jr.',
+    givenName: 'Carlos',
+    familyName: 'Sainz',
+    dateOfBirth: '1994-09-01',
+    nationality: 'Spanish'
+  },
+  {
+    driverId: 'george_russell',
+    permanentNumber: '63',
+    code: 'RUS',
+    url: 'http://en.wikipedia.org/wiki/George_Russell_(racing_driver)',
+    givenName: 'George',
+    familyName: 'Russell',
+    dateOfBirth: '1998-02-15',
+    nationality: 'British'
+  },
+  {
+    driverId: 'sergio_perez',
+    permanentNumber: '11',
+    code: 'PER',
+    url: 'http://en.wikipedia.org/wiki/Sergio_Pérez',
+    givenName: 'Sergio',
+    familyName: 'Pérez',
+    dateOfBirth: '1990-01-26',
+    nationality: 'Mexican'
+  },
+  {
+    driverId: 'fernando_alonso',
+    permanentNumber: '14',
+    code: 'ALO',
+    url: 'http://en.wikipedia.org/wiki/Fernando_Alonso',
+    givenName: 'Fernando',
+    familyName: 'Alonso',
+    dateOfBirth: '1981-07-29',
+    nationality: 'Spanish'
+  },
+  {
+    driverId: 'lance_stroll',
+    permanentNumber: '18',
+    code: 'STR',
+    url: 'http://en.wikipedia.org/wiki/Lance_Stroll',
+    givenName: 'Lance',
+    familyName: 'Stroll',
+    dateOfBirth: '1998-10-29',
+    nationality: 'Canadian'
+  }
+];
+
+// Mock F1 Constructors for 2024/2025 season
+export const mockConstructors2024: ErgastConstructor[] = [
+  {
+    constructorId: 'red_bull',
+    url: 'http://en.wikipedia.org/wiki/Red_Bull_Racing',
+    name: 'Red Bull Racing Honda RBPT',
+    nationality: 'Austrian'
+  },
+  {
+    constructorId: 'mercedes',
+    url: 'http://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One',
+    name: 'Mercedes',
+    nationality: 'German'
+  },
+  {
+    constructorId: 'ferrari',
+    url: 'http://en.wikipedia.org/wiki/Scuderia_Ferrari',
+    name: 'Ferrari',
+    nationality: 'Italian'
+  },
+  {
+    constructorId: 'mclaren',
+    url: 'http://en.wikipedia.org/wiki/McLaren',
+    name: 'McLaren Mercedes',
+    nationality: 'British'
+  },
+  {
+    constructorId: 'aston_martin',
+    url: 'http://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One',
+    name: 'Aston Martin Aramco Mercedes',
+    nationality: 'British'
+  },
+  {
+    constructorId: 'alpine',
+    url: 'http://en.wikipedia.org/wiki/Alpine_F1_Team',
+    name: 'Alpine F1 Team',
+    nationality: 'French'
+  },
+  {
+    constructorId: 'williams',
+    url: 'http://en.wikipedia.org/wiki/Williams_Grand_Prix_Engineering',
+    name: 'Williams Mercedes',
+    nationality: 'British'
+  },
+  {
+    constructorId: 'alphatauri',
+    url: 'http://en.wikipedia.org/wiki/Scuderia_AlphaTauri',
+    name: 'Scuderia AlphaTauri Honda RBPT',
+    nationality: 'Italian'
+  },
+  {
+    constructorId: 'alfa',
+    url: 'http://en.wikipedia.org/wiki/Alfa_Romeo_in_Formula_One',
+    name: 'Alfa Romeo F1 Team Stake',
+    nationality: 'Swiss'
+  },
+  {
+    constructorId: 'haas',
+    url: 'http://en.wikipedia.org/wiki/Haas_F1_Team',
+    name: 'MoneyGram Haas F1 Team',
+    nationality: 'American'
+  }
+];
+
+// Functions to get mock driver and constructor data
+export function getMockDriversForCurrentSeason(): ErgastDriver[] {
+  return mockDrivers2024;
+}
+
+export function getMockConstructorsForCurrentSeason(): ErgastConstructor[] {
+  return mockConstructors2024;
 }

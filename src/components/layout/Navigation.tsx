@@ -4,11 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Flag, Calendar, Home, Menu, X } from 'lucide-react';
+import { Flag, Calendar, Home, Menu, X, BarChart3, Users, Building2 } from 'lucide-react';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
   { name: 'Calendar', href: '/calendar', icon: Calendar },
+  { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
+  { name: 'Drivers', href: '/drivers', icon: Users },
+  { name: 'Teams', href: '/teams', icon: Building2 },
 ];
 
 export function Navigation() {
