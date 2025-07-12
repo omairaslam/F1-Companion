@@ -4,7 +4,6 @@ import { ErgastRace, getRaceDateTime, isRaceToday, isRaceThisWeekend } from '@/l
 import { MiniCountdown } from './Countdown';
 import { cn, formatDate, formatTime } from '@/lib/utils';
 import { MapPin, Clock, Calendar, ExternalLink, Flag } from 'lucide-react';
-import Image from 'next/image';
 
 interface RaceCardProps {
   race: ErgastRace;

@@ -91,7 +91,7 @@ export default function Home() {
             Features Coming Soon
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We're building the most comprehensive F1 companion app with all the features
+            We&apos;re building the most comprehensive F1 companion app with all the features
             you need to stay connected to the world of Formula 1.
           </p>
         </div>

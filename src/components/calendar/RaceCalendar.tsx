@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ErgastRace, ergastAPI } from '@/lib/api/ergast';
 import { RaceCard, NextRaceCard, RaceListItem } from './RaceCard';
-import { Countdown, RaceWeekendCountdown } from './Countdown';
+import { RaceWeekendCountdown } from './Countdown';
 import { getNextSession } from '@/hooks/useCountdown';
 import { cn } from '@/lib/utils';
 import { Calendar, Grid, List, Loader2, AlertCircle, RefreshCw } from 'lucide-react';
@@ -32,7 +32,7 @@ export function RaceCalendar({
   const [view, setView] = useState<'grid' | 'list'>(defaultView);
   const [refreshing, setRefreshing] = useState(false);
 
-  const fetchRaces = async (showRefreshing = false) => {
+  const fetchRaces = useCallback(async (showRefreshing = false) => {
     try {
       if (showRefreshing) {
         setRefreshing(true);
@@ -64,11 +64,11 @@ export function RaceCalendar({
       setLoading(false);
       setRefreshing(false);
     }
-  };
+  }, [season, maxRaces]);
 
   useEffect(() => {
     fetchRaces();
-  }, [season, maxRaces]);
+  }, [fetchRaces]);
 
   const handleRefresh = () => {
     fetchRaces(true);
