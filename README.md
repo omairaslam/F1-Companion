@@ -18,7 +18,7 @@ Experience the full F1 Companion with live race countdowns, interactive calendar
 
 ## ✨ Features
 
-### 🏁 Phase 1: Race Calendar & Countdown (✅ Complete)
+### 🏁 Phase 1: Race Calendar & Countdown (✅ Complete & Live)
 - **Live Race Calendar** - Complete F1 race schedule with upcoming events
 - **Real-time Countdowns** - Live countdown timers to next race, qualifying, and practice sessions
 - **Circuit Information** - Detailed information about each circuit with location and track details
