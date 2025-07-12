@@ -1,7 +1,10 @@
 // Ergast API service for F1 data
 // Documentation: https://ergast.com/mrd/
 
+import { getMockRacesForCurrentSeason, getMockNextRace, getMockUpcomingRaces } from './mock-data';
+
 const ERGAST_BASE_URL = 'https://ergast.com/api/f1';
+const USE_MOCK_DATA = process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_USE_MOCK_DATA === 'true';
 
 // Types for Ergast API responses
 export interface ErgastCircuit {
@@ -80,12 +83,18 @@ export class ErgastAPI {
 
   private async fetchData<T>(endpoint: string): Promise<T> {
     try {
-      const response = await fetch(`${this.baseUrl}${endpoint}.json`);
-      
+      const response = await fetch(`${this.baseUrl}${endpoint}.json`, {
+        headers: {
+          'Accept': 'application/json',
+        },
+        // Add timeout
+        signal: AbortSignal.timeout(10000), // 10 second timeout
+      });
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       return data;
     } catch (error) {
@@ -96,41 +105,61 @@ export class ErgastAPI {
 
   // Get current season races
   async getCurrentSeasonRaces(): Promise<ErgastRace[]> {
-    const currentYear = new Date().getFullYear();
-    const data = await this.fetchData<ErgastResponse<ErgastRace>>(`/${currentYear}`);
-    return data.MRData.RaceTable?.Races || [];
+    try {
+      const currentYear = new Date().getFullYear();
+      const data = await this.fetchData<ErgastResponse<ErgastRace>>(`/${currentYear}`);
+      return data.MRData.RaceTable?.Races || [];
+    } catch (error) {
+      console.warn('Falling back to mock data due to API error:', error);
+      return getMockRacesForCurrentSeason();
+    }
   }
 
   // Get races for a specific season
   async getSeasonRaces(season: number): Promise<ErgastRace[]> {
-    const data = await this.fetchData<ErgastResponse<ErgastRace>>(`/${season}`);
-    return data.MRData.RaceTable?.Races || [];
+    try {
+      const data = await this.fetchData<ErgastResponse<ErgastRace>>(`/${season}`);
+      return data.MRData.RaceTable?.Races || [];
+    } catch (error) {
+      console.warn('Falling back to mock data due to API error:', error);
+      return getMockRacesForCurrentSeason();
+    }
   }
 
   // Get next race
   async getNextRace(): Promise<ErgastRace | null> {
-    const races = await this.getCurrentSeasonRaces();
-    const now = new Date();
-    
-    const upcomingRaces = races.filter(race => {
-      const raceDateTime = new Date(`${race.date}T${race.time || '14:00:00'}Z`);
-      return raceDateTime > now;
-    });
+    try {
+      const races = await this.getCurrentSeasonRaces();
+      const now = new Date();
 
-    return upcomingRaces.length > 0 ? upcomingRaces[0] : null;
+      const upcomingRaces = races.filter(race => {
+        const raceDateTime = new Date(`${race.date}T${race.time || '14:00:00'}Z`);
+        return raceDateTime > now;
+      });
+
+      return upcomingRaces.length > 0 ? upcomingRaces[0] : null;
+    } catch (error) {
+      console.warn('Falling back to mock data due to API error:', error);
+      return getMockNextRace();
+    }
   }
 
   // Get upcoming races (next 5)
   async getUpcomingRaces(limit: number = 5): Promise<ErgastRace[]> {
-    const races = await this.getCurrentSeasonRaces();
-    const now = new Date();
-    
-    const upcomingRaces = races.filter(race => {
-      const raceDateTime = new Date(`${race.date}T${race.time || '14:00:00'}Z`);
-      return raceDateTime > now;
-    });
+    try {
+      const races = await this.getCurrentSeasonRaces();
+      const now = new Date();
 
-    return upcomingRaces.slice(0, limit);
+      const upcomingRaces = races.filter(race => {
+        const raceDateTime = new Date(`${race.date}T${race.time || '14:00:00'}Z`);
+        return raceDateTime > now;
+      });
+
+      return upcomingRaces.slice(0, limit);
+    } catch (error) {
+      console.warn('Falling back to mock data due to API error:', error);
+      return getMockUpcomingRaces(limit);
+    }
   }
 
   // Get race by round
