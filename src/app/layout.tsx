@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { Navigation } from "@/components/layout/Navigation";
 import "./globals.css";
 
 const inter = Inter({
@@ -84,6 +85,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <div id="root">
+          <Navigation />
           {children}
         </div>
       </body>

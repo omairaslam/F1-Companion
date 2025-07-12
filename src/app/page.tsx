@@ -1,4 +1,6 @@
 import { Flag, Calendar, Users, Newspaper, Camera, BookOpen, Zap, Smile } from "lucide-react";
+import { CompactRaceCalendar } from "@/components/calendar/RaceCalendar";
+import Link from "next/link";
 
 export default function Home() {
   const features = [
@@ -6,7 +8,8 @@ export default function Home() {
       icon: Calendar,
       title: "Race Calendar & Countdown",
       description: "Never miss a race with live countdowns and detailed schedules",
-      status: "Coming Soon"
+      status: "Available",
+      href: "/calendar"
     },
     {
       icon: Users,
@@ -96,16 +99,19 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
-            return (
+            const FeatureCard = (
               <div
-                key={index}
                 className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-red-100 rounded-lg">
                     <IconComponent className="w-5 h-5 text-red-600" />
                   </div>
-                  <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                  <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                    feature.status === 'Available'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-gray-100 text-gray-500'
+                  }`}>
                     {feature.status}
                   </span>
                 </div>
@@ -117,7 +123,40 @@ export default function Home() {
                 </p>
               </div>
             );
+
+            return feature.href ? (
+              <Link key={index} href={feature.href}>
+                {FeatureCard}
+              </Link>
+            ) : (
+              <div key={index}>
+                {FeatureCard}
+              </div>
+            );
           })}
+        </div>
+      </div>
+
+      {/* Race Calendar Preview */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Upcoming Races
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+            Stay up-to-date with the latest Formula 1 race schedule and never miss a Grand Prix
+          </p>
+          <Link
+            href="/calendar"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors"
+          >
+            <Calendar className="w-5 h-5" />
+            View Full Calendar
+          </Link>
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          <CompactRaceCalendar maxRaces={3} />
         </div>
       </div>
 
@@ -131,13 +170,13 @@ export default function Home() {
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm font-medium text-gray-700">Overall Progress</span>
-                <span className="text-sm font-medium text-red-600">5%</span>
+                <span className="text-sm font-medium text-red-600">25%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-red-600 h-2 rounded-full" style={{ width: '5%' }}></div>
+                <div className="bg-red-600 h-2 rounded-full" style={{ width: '25%' }}></div>
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                Project setup and infrastructure complete
+                Race calendar feature now available
               </p>
             </div>
           </div>
